@@ -3,157 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Toko Online - Produk Berkualitas, Harga Terjangkau">
-    <title>Toko Web Online</title>
+    <meta name="description" content="Testimoni pelanggan tentang layanan kami.">
+    <title>Testimoni Klien</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: #f4f4f4;
             color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            text-align: center;
         }
         header {
             background: linear-gradient(to right, #007bff, #00c6ff);
             color: white;
-            text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
         }
         nav {
             background: #222;
-            padding: 15px;
-            text-align: center;
+            padding: 10px;
         }
         nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
             font-size: 18px;
-            padding: 5px 10px;
-        }
-        nav a.active {
-            background-color: #007bff;
-            border-radius: 5px;
         }
         .container {
-            width: 80%;
+            width: 90%;
+            max-width: 600px;
             margin: auto;
             padding: 20px;
-            text-align: center;
-            flex: 1;
         }
-        .cart-item {
+        .testimoni-slider {
+            position: relative;
+            overflow: hidden;
+        }
+        .testimoni-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .testimoni-item {
+            min-width: 100%;
             background: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 10px auto;
-            width: 50%;
-            position: relative;
+            margin-bottom: 20px;
         }
-        .btn-checkout, .btn-cancel {
-            background: #28a745;
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
             color: white;
-            padding: 10px 15px;
             border: none;
+            padding: 10px;
             cursor: pointer;
             border-radius: 5px;
-            margin: 5px;
         }
-        .btn-checkout:hover {
-            background: #218838;
+        .prev {
+            left: 10px;
         }
-        .btn-cancel {
-            background: #dc3545;
-        }
-        .btn-cancel:hover {
-            background: #c82333;
+        .next {
+            right: 10px;
         }
         footer {
             background: #222;
             color: white;
-            text-align: center;
             padding: 10px;
-            margin-top: auto;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Keranjang Belanja</h1>
+        <h1>Testimoni Klien</h1>
+        <p>Lihat pengalaman pelanggan kami yang puas dengan layanan kami.</p>
     </header>
     
     <nav>
-        <a href="index.html">Beranda</a>
-        <a href="produk.html">Produk</a>
+        <a href="index.html">Home</a>
         <a href="kontak.html">Kontak</a>
-        <a href="checkout.html" class="active">Checkout</a>
+        <a href="testimonial.html">Testimoni</a>
     </nav>
     
-    <div class="container">
-        <h2>Item di Keranjang</h2>
-        <div id="cart-items"></div>
-        <button class="btn-checkout" onclick="checkout()">Checkout via WhatsApp</button>
-        <button class="btn-checkout" onclick="window.location.href='index.html'">Kembali</button>
-    </div>
+    <section id="testimoni">
+        <div class="container">
+            <h2>Apa Kata Mereka?</h2>
+            <div class="testimoni-slider">
+                <button class="slider-btn prev" onclick="prevSlide()">&#10094;</button>
+                <div class="testimoni-wrapper">
+                    <div class="testimoni-item">
+                        <p>"Layanan yang luar biasa! Sangat profesional dan cepat!"</p>
+                        <strong>- Budi Santoso</strong>
+                    </div>
+                    <div class="testimoni-item">
+                        <p>"Website saya terlihat modern dan responsif, sangat puas dengan hasilnya!"</p>
+                        <strong>- Siti Aisyah</strong>
+                    </div>
+                    <div class="testimoni-item">
+                        <p>"Pelayanan ramah dan hasil memuaskan, terima kasih!"</p>
+                        <strong>- Dewa Prasetya</strong>
+                    </div>
+                </div>
+                <button class="slider-btn next" onclick="nextSlide()">&#10095;</button>
+            </div>
+            <p><a href="https://www.instagram.com/p/DBytIsnzwce/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Lihat lebih banyak testimoni di Instagram</a></p>
+        </div>
+    </section>
     
     <footer>
-        <p>&copy; 2025 Toko Online. All rights reserved.</p>
+        <p>&copy; 2025 Jasa Pembuatan Website Riadytech. All rights reserved.</p>
     </footer>
-
+    
     <script>
-        function loadCart() {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            let cartItems = document.getElementById("cart-items");
-            cartItems.innerHTML = "";
-            
-            cart.forEach((item, index) => {
-                let itemElement = document.createElement("div");
-                itemElement.classList.add("cart-item");
-                itemElement.innerHTML = `
-                    <p class="item-name">${item.name}</p>
-                    <p class="item-price">Rp ${parseInt(item.price).toLocaleString()}</p>
-                    <input type="number" class="item-qty" value="1" min="1" data-index="${index}">
-                    <button class="btn-cancel" onclick="removeFromCart(${index})">Cancel</button>
-                `;
-                cartItems.appendChild(itemElement);
-            });
+        let currentIndex = 0;
+        function nextSlide() {
+            const wrapper = document.querySelector('.testimoni-wrapper');
+            const slides = document.querySelectorAll('.testimoni-item');
+            currentIndex = (currentIndex + 1) % slides.length;
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
-        
-        function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            cart.splice(index, 1);
-            localStorage.setItem("cart", JSON.stringify(cart));
-            loadCart();
+        function prevSlide() {
+            const wrapper = document.querySelector('.testimoni-wrapper');
+            const slides = document.querySelectorAll('.testimoni-item');
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
-        
-        function checkout() {
-            let items = document.querySelectorAll(".cart-item");
-            let orderDetails = "Order Saya:%0A";
-            let total = 0;
-            
-            items.forEach(item => {
-                let name = item.querySelector(".item-name").innerText;
-                let price = parseInt(item.querySelector(".item-price").innerText.replace("Rp ", "").replace(".", ""));
-                let qty = parseInt(item.querySelector(".item-qty").value);
-                let subtotal = price * qty;
-                total += subtotal;
-                orderDetails += `- ${name} x${qty} = Rp ${subtotal.toLocaleString()}%0A`;
-            });
-            
-            orderDetails += `Total: Rp ${total.toLocaleString()}%0A`;
-            orderDetails += `Metode Pembayaran: Dana%0A`;
-            orderDetails += `Silakan transfer ke nomor Dana: 085138745718 lalu konfirmasi pembayaran.`;
-            
-            let waLink = `https://wa.me/6285138745718?text=${orderDetails}`;
-            window.open(waLink, '_blank');
-        }
-        
-        document.addEventListener("DOMContentLoaded", loadCart);
+        setInterval(nextSlide, 5000);
     </script>
 </body>
 </html>

@@ -13,6 +13,9 @@
             padding: 0;
             background-color: #f8f9fa;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         header {
             background: linear-gradient(to right, #007bff, #00c6ff);
@@ -22,14 +25,14 @@
         }
         nav {
             background: #222;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
         }
         nav a {
             color: white;
-            margin: 0 15px;
+            margin: 0 10px;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             padding: 5px 10px;
         }
         nav a.active {
@@ -37,10 +40,12 @@
             border-radius: 5px;
         }
         .container {
-            width: 80%;
+            width: 90%;
+            max-width: 800px;
             margin: auto;
             padding: 20px;
             text-align: center;
+            flex: 1;
         }
         .contact-info {
             background: white;
@@ -49,12 +54,45 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #218838;
+        }
         footer {
             background: #222;
             color: white;
             text-align: center;
             padding: 10px;
-            margin-top: 20px;
+            margin-top: auto;
+        }
+        @media screen and (max-width: 768px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
@@ -75,14 +113,13 @@
         <div class="container">
             <h2>Informasi Kontak</h2>
             <div class="contact-info">
-                <p><strong>Email:</strong> fadhilanugrah864@gmail.com</p>
+                <p><strong>Email:</strong> <a href="mailto:fadhilanugrah864@gmail.com">fadhilanugrah864@gmail.com</a></p>
                 <p><strong>WhatsApp:</strong> <a href="https://wa.me/6285138745718" target="_blank">085138745718</a></p>
-                <p><strong>Alamat:</strong> Jl. raya lohbener lama 45252 indramayu jawabarat.</p>
-
+                <p><strong>Alamat:</strong> Jl. Raya Lohbener Lama 45252, Indramayu, Jawa Barat.</p>
             </div>
             <div class="button-container">
-                <button class="btn btn-primary" onclick="window.location.href='testimonial.html'">Testimoni?</button>
-                </div>
+                <button class="btn" onclick="window.location.href='testimonial.html'">Testimoni?</button>
+            </div>
         </div>
     </section>
     

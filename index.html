@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Toko Online - Produk Berkualitas, Harga Terjangkau">
-    <title> Web  toko Online</title>
+    <title>Web Toko Online</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -18,21 +18,22 @@
             background: linear-gradient(to right, #007bff, #00c6ff);
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
         }
         nav {
             background: #222;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
         }
         nav a {
             color: white;
-            margin: 0 15px;
+            margin: 0 10px;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
         }
         .container {
-            width: 80%;
+            width: 90%;
+            max-width: 1200px;
             margin: auto;
             padding: 20px;
         }
@@ -53,7 +54,9 @@
         }
         .product img {
             width: 100%;
+            max-width: 250px;
             border-radius: 10px;
+            cursor: pointer;
         }
         .btn {
             background: #28a745;
@@ -68,10 +71,6 @@
         .btn:hover {
             background: #218838;
         }
-        .button-container {
-            display: flex;
-            text-align: center;
-        }
         footer {
             background: #222;
             color: white;
@@ -79,18 +78,63 @@
             padding: 10px;
             margin-top: 20px;
         }
+
+        /* MODAL (Gambar Perbesar) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-content {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media screen and (max-width: 768px) {
+            .product {
+                width: 100%;
+                margin: 10px 0;
+            }
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Selamat Datang di Website farstore22</h1>
+        <h1>Selamat Datang di Website Farstore22</h1>
         <p>Pembuatan Website yang Profesional dan Berkualitas</p>
     </header>
     
     <nav>
         <a href="produk.html">Produk</a>
         <a href="kontak.html">Kontak</a>
-        <a href="checkout.html">chekout Sekarang</a>
+        <a href="checkout.html">Checkout Sekarang</a>
     </nav>
     
     <section id="products">
@@ -98,25 +142,25 @@
             <h2>Produk Terbaru</h2>
             <div class="product-list">
                 <div class="product">
-                    <img src="images/6.jpg" alt="Produk 1">
+                    <img src="images/6.jpg" alt="Produk 1" onclick="openModal('images/6.jpg')">
                     <h3>Produk 1</h3>
-                    <p>company profile dengan design profesional</p>
+                    <p>Company profile dengan design profesional</p>
                     <p>Rp 600.000</p>
-                    <button class="btn" onclick="orderProduct('Produk 1', 100000)">Beli Sekarang</button>
+                    <button class="btn" onclick="orderProduct('Produk 1', 600000)">Beli Sekarang</button>
                 </div>
                 <div class="product">
-                    <img src="images/8.jpg" alt="Produk 2">
+                    <img src="images/8.jpg" alt="Produk 2" onclick="openModal('images/8.jpg')">
                     <h3>Produk 2</h3>
-                    <p>simpel landing page admin</p>
+                    <p>Simpel landing page admin</p>
                     <p>Rp 200.000</p>
-                    <button class="btn" onclick="orderProduct('Produk 2', 150000)">Beli Sekarang</button>
+                    <button class="btn" onclick="orderProduct('Produk 2', 200000)">Beli Sekarang</button>
                 </div>
                 <div class="product">
-                    <img src="images/13.jpg" alt="Produk 3">
+                    <img src="images/13.jpg" alt="Produk 3" onclick="openModal('images/13.jpg')">
                     <h3>Produk 3</h3>
-                    <p>publish dan hosting toko web anda</p>
+                    <p>Publish dan hosting toko web Anda</p>
                     <p>Rp 50.000</p>
-                    <button class="btn" onclick="orderProduct('Produk 3', 200000)">Beli Sekarang</button>
+                    <button class="btn" onclick="orderProduct('Produk 3', 50000)">Beli Sekarang</button>
                 </div>
             </div>
         </div>
@@ -129,21 +173,31 @@
         </div>
     </section>
 
-    <div class="button-container">
-    <button class="btn btn-primary" onclick="window.location.href='produk.html'">Lihat Lebih</button>
+    <footer>
+        <p>&copy; 2025 Toko Online. All rights reserved.</p>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
     </div>
 
-    
-    <footer>
-        <p>&copy; web 2025 Toko Online. All rights reserved.</p>
-    </footer>
-    
     <script>
         function orderProduct(productName, price) {
             var phone = "6285138745718";
             var message = `Halo, saya ingin memesan ${productName} seharga Rp ${price} via Dana.`;
             var whatsappURL = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
+        }
+
+        function openModal(imageSrc) {
+            document.getElementById("imageModal").style.display = "block";
+            document.getElementById("modalImage").src = imageSrc;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
         }
     </script>
 </body>
