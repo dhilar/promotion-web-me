@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Toko Online - Produk Berkualitas, Harga Terjangkau">
+    <title>Toko Web Online</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        nav {
+            background: #222;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 5px 10px;
+        }
+        nav a.active {
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            flex: 1;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            text-align: center;
+            margin: 10px;
+        }
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        .hidden {
+            display: none;
+        }
+        .btn-load-more {
+            display: block;
+            margin: 20px auto;
+            background: #007bff;
+        }
+        .btn-load-more:hover {
+            background: #0056b3;
+        }
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Website Toko Online</h1>
+        <p>Pembuatan Website yang Profesional dan Berkualitas</p>
+    </header>
+    
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a href="products.html" class="active">Produk</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="checkout.html">Checkout</a>
+    </nav>
+    
+    <section id="products">
+        <div class="container">
+            <h2>Produk Terbaru</h2>
+            <div class="product-list">
+                <div class="product" data-name="Produk 1" data-price="100000">
+                    <img src="images/13.jpg" alt="Produk 1">
+                    <h3>Produk 1</h3>
+                    <p>Rp 50.000</p>
+                    <button class="btn add-to-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product" data-name="Produk 2" data-price="150000">
+                    <img src="images/9.jpg" alt="Produk 2">
+                    <h3>Produk 2</h3>
+                    <p>Rp 75.000</p>
+                    <button class="btn add-to-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product" data-name="Produk 3" data-price="200000">
+                    <img src="images/4.jpg" alt="Produk 3">
+                    <h3>Produk 3</h3>
+                    <p>Rp 50.000</p>
+                    <button class="btn add-to-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product hidden" data-name="Produk 4" data-price="250000">
+                    <img src="images/11.jpg" alt="Produk 4">
+                    <h3>Produk 4</h3>
+                    <p>Rp 50.000</p>
+                    <button class="btn add-to-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product hidden" data-name="Produk 5" data-price="300000">
+                    <img src="images/10.jpg" alt="Produk 5">
+                    <h3>Produk 5</h3>
+                    <p>Rp 300.000</p>
+                    <button class="btn add-to-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product hidden" data-name="Produk 6" data-price="350000">
+                    <img src="images/7.jpg" alt="Produk 6">
+                    <h3>Produk 6</h3>
+                    <p>Rp 50.000</p>
+                    <button class="btn add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <button class="btn btn-load-more" onclick="showMoreProducts()">Lihat Lebih Banyak</button>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Toko Online. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showMoreProducts() {
+            document.querySelectorAll(".hidden").forEach(product => {
+                product.classList.remove("hidden");
+            });
+            document.querySelector(".btn-load-more").style.display = "none";
+        }
+    </script>
+</body>
+</html>
